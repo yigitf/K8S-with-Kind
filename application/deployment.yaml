@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fatih-app
+  namespace: uygulama
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fatih-app
+  template:
+    metadata:
+      labels:
+        app: fatih-app
+    spec:
+      containers:
+        - name: fatih-app
+          image: fatih-app:0.0.1
+          ports:
+            - containerPort: 9001
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
