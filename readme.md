@@ -55,22 +55,19 @@ choco install kubernetes-helm
 # Installation Loki, Prometheus and Grafana
 
 helm repo add grafana https://grafana.github.io/helm-charts
-
 helm repo add Prometheus-community https://prometheus-community.github.io/helm-charts
-
 helm repo update
 
 helm install loki grafana/loki-stack --namespace log-monitoring --create-namespace --set grafana.enabled=true
-
 helm install prometheus Prometheus-community/kube-prometheus-stack --namespace metrics-monitoring --create-namespace
 
 kubectl get secret -n metrics-monitoring prometheus-grafana -o yaml
 
 kubectl port-forward --namespace metrics-monitoring service/prometheus-grafana 3000:80
+kubectl port-forward --namespace log-monitoring service/loki-grafana 3001:80
 
 http://localhost:3000
 http://loki-gateway.log-monitoring.svc.cluster.local
-
 
 # Load test (python required)
 
@@ -78,14 +75,9 @@ pip install requests
 
 python bot/test.py
 
+# For HPA to work properly
+kubectl apply -f monitoring/metrics-server.yaml -n kube-system
 
-
-
-
-
-
-
-
-
-# Destroy Everything
+## DESTROY EVERYTHING ##
 .\kind.exe delete cluster 
+
