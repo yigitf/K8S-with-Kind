@@ -31,6 +31,9 @@ kubectl apply -f application/service.yaml
 kubectl apply -f application/ingress.yaml
 kubectl apply -f application/hpa.yaml
 
+# Install metrics-server agents for HPA to work properly
+kubectl apply -f monitoring/metrics-server.yaml -n kube-system
+
 # To test the application:
 http://localhost/api/foos?val=TEST
 
@@ -75,8 +78,6 @@ pip install requests
 
 python bot/test.py
 
-# For HPA to work properly
-kubectl apply -f monitoring/metrics-server.yaml -n kube-system
 
 ## DESTROY EVERYTHING ##
 .\kind.exe delete cluster 
