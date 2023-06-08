@@ -49,9 +49,7 @@ kubectl apply -f monitoring/metrics-server.yaml -n kube-system
 ```
 
 ### To test the application:
-```
-http://localhost/api/foos?val=TEST
-```
+* [localhost/api/foos?val=TEST](http://localhost/api/foos?val=TEST)
 
 
 # MONITORING (extra)
@@ -69,9 +67,8 @@ kubectl -n kubernetes-dashboard create token admin-user
 ```
 
 ### To access the dashboard via browser:
-```
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-```
+* [Kubernetes Dashboard](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)
+
 
 ### Installation the Chocolatey and Helm (Powershell/Administrative)
 ```
@@ -101,7 +98,7 @@ kubectl get secret -n logs-monitoring loki-grafana -o yaml
 kubectl port-forward --namespace metrics-monitoring service/prometheus-grafana 3000:80
 kubectl port-forward --namespace log-monitoring service/loki-grafana 3001:80
 ```
-*   [Grafana(localhost:3000)](http://localhost:3000)
+*   [Grafana (localhost:3000)](http://localhost:3000)
 
 ### Load test (python required)
 
